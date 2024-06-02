@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CarsRentalService } from './shared/cars-rental.service';
 import { Cars } from './shared/cars/cars';
 
@@ -26,5 +26,10 @@ export class CarsRentalController {
     @Put(':id')
     async updateCar(@Param('id') id: number, @Body() car: Cars): Promise<Cars> {
         return this.carsRentalService.updateCar(id, car);
+    }
+
+    @Delete(':id')
+    async deleteCar(@Param('id') id: number): Promise<Cars[]> {
+        return this.carsRentalService.deleteCar(id);
     }
 }

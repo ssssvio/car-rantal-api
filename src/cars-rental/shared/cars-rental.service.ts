@@ -53,11 +53,12 @@ export class CarsRentalService {
     updateCar(id: number, car: Cars): Cars {
         const index = this.cars.findIndex(car => car.id === +id);
         this.cars[index] = car;
+        car.id = +id;
         return car;
     }
 
     deleteCar(id: number): Cars[] {
-        this.cars = this.cars.filter(car => car.id !== id);
+        this.cars = this.cars.filter(car => car.id !== +id);
         return this.cars;
     }
 }
