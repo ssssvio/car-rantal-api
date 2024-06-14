@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Java70script@
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: car_rental_app
+    environment:
+      - NODE_ENV=production
+      - TYPEORM_CONNECTION=mssql
+      - TYPEORM_HOST=db
+      - TYPEORM_USERNAME=sa
+      - TYPEORM_PASSWORD=Java70script@
+      - TYPEORM_DATABASE=car_rental_db
+      - TYPEORM_PORT=1433
+      - TYPEORM_SYNCHRONIZE=true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  sqlvolume:
