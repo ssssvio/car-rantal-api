@@ -4,6 +4,6 @@ import { CarsRentalModule } from './cars-rental/cars-rental.module';
 @Module({
   imports: [CarsRentalModule],
   controllers: [],
-  providers: []
+  providers: [],
 })
 export class AppModule {}
